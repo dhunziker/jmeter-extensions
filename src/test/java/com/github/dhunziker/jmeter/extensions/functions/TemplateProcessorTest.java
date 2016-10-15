@@ -97,14 +97,14 @@ public class TemplateProcessorTest {
         row2.put("col1", "Foo");
         row2.put("col2", "Bar");
 
-        List<Map<String, Object>> resultSet = Arrays.asList(row1, row2);
+        List<Map<String, Object>> data = Arrays.asList(row1, row2);
 
         Map<String, Object> vars = new HashMap<>();
-        vars.put("resultSet", resultSet);
+        vars.put("data", data);
         templateProcessor.processTemplate(src, dst, vars);
 
         String result = FileUtils.readFileToString(new File(dst));
-        assertEquals(3, StringUtils.countMatches(result, "<tr>"));
+        assertEquals(3, StringUtils.countMatches(result, "</tr>"));
     }
 
     @Test(expected = RuntimeException.class)
