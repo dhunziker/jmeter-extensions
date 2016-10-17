@@ -1,5 +1,6 @@
 package com.github.dhunziker.jmeter.extensions.functions;
 
+import com.github.dhunziker.jmeter.extensions.util.JMeterUtils;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.FileTemplateLoader;
 import freemarker.cache.MultiTemplateLoader;
@@ -49,8 +50,7 @@ public class TemplateProcessor extends AbstractFunction {
         Path src = Paths.get(parameters.get(0)).toAbsolutePath();
         String fileName = src.getFileName().toString().replace(".ftl", ".html");
         Path dst = Paths.get(parameters.get(1), fileName).toAbsolutePath();
-        Map<String, Object> vars = getVariables().entrySet().stream().collect(toMap(Map.Entry::getKey, Map.Entry::getValue));
-        processTemplate(src.toString(), dst.toString(), vars);
+        processTemplate(src.toString(), dst.toString(), JMeterUtils.getVariables());
         return dst.toString();
     }
 
